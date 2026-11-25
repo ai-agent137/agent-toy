@@ -2,7 +2,7 @@ package xyz.power.agent.step01;
 
 import xyz.power.agent.Agent;
 import xyz.power.llm.ChatModel;
-import xyz.power.llm.Message;
+import xyz.power.llm.schemas.Message;
 import xyz.power.utils.Models;
 
 import java.util.List;

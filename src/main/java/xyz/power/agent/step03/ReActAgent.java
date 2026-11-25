@@ -2,7 +2,7 @@ package xyz.power.agent.step03;
 
 import xyz.power.agent.Agent;
 import xyz.power.llm.ChatModel;
-import xyz.power.llm.Message;
+import xyz.power.llm.schemas.Message;
 import xyz.power.utils.Json;
 import xyz.power.utils.Models;
 
@@ -97,16 +97,6 @@ public interface ReActAgent extends Agent {
             } catch (Exception e) {
                 return "工具执行失败: " + e.getMessage();
             }
-        } /** 本地 Mock 天气数据。 */
-        final class MockWeather {
-            private static final Map<String, String> DATA = Map.of(
-                    "北京", "晴，26℃", "上海", "多云，28℃", "广州", "雷阵雨，31℃",
-                    "深圳", "阵雨，30℃", "杭州", "晴，27℃", "成都", "阴，22℃");
-
-            public static String query(String city) {
-                String key = (city == null ? "" : city.trim());
-                return DATA.getOrDefault(key, "未收录城市 " + key + " 的数据");
-            }
         }
 
         @Override
@@ -141,10 +131,21 @@ public interface ReActAgent extends Agent {
             return s;
         }
     }
-    public static void main(String[] args) {
+    /** 本地 Mock 天气数据。 */
+    final  class MockWeather {
+        private static final Map<String, String> DATA = Map.of(
+                "北京", "晴，26℃", "上海", "多云，28℃", "广州", "雷阵雨，31℃",
+                "深圳", "阵雨，30℃", "杭州", "晴，27℃", "成都", "阴，22℃");
+
+        public static String query(String city) {
+            String key = (city == null ? "" : city.trim());
+            return DATA.getOrDefault(key, "未收录城市 " + key + " 的数据");
+        }
+    }
+    static void main(String[] args) {
         ChatModel model = Models.getModel();
         ReActAgent agent = new Impl(model);
-        String answer = agent.chat("北京今天天气怎么样？");
+        String answer = agent.chat("请调用工具，23 + 133 等于多少 ");
         System.out.println(answer);
         System.out.println(agent.trace());
     }
