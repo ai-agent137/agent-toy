@@ -16,3 +16,8 @@ jev-api-key=
 
 # 决策模型名称
 jev-model=jev-1.14
+
+# 申请入口：https://console.bce.baidu.com/iam/#/iam/apikey/list
+# mcp-search-api-key=粘贴你的百度百炼 API Key（形如 bce 开头的一长串）
+# 也可用完整地址整体覆盖（含 api_key 参数）：
+# mcp-search-url=http://appbuilder.baidu.com/v2/ai_search/mcp/sse?api_key=粘贴你的Key
